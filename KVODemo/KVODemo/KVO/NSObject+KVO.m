@@ -41,11 +41,14 @@ const NSString * observeKeyPathKey = @"observeKeyPathKey";
 }
 
 void setAge(id self , SEL _cmd,NSUInteger  age){
-
-    /*这里还应该调用父亲的[super setAge:age]方法*/  
-    
+   
     NSString *keyPath =  objc_getAssociatedObject(self, (__bridge const void * _Nonnull)(observeKeyPathKey));
     NSObject *obj =  objc_getAssociatedObject(self, (__bridge const void * _Nonnull)(observeKey));
+    [self willChangeValueForKey:keyPath];
+    
+    /*这里还应该调用父亲的[super setAge:age]方法*/  
+    
+    [self didChangeValueForKey:keyPath];
     
     [obj  observeValueForKeyPath:keyPath ofObject:self change:@{@"new":[NSNumber numberWithInteger:age]} context:nil];
 }
