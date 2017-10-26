@@ -41,6 +41,9 @@
     self.p.age = tempAge;
 }
 
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+}
 
 
 #pragma mark - dealloc
